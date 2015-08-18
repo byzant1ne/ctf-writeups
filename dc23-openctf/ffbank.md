@@ -7,7 +7,7 @@ We came excruciatingly close to solving ffbank (100pts, raised to 250 mid-compet
 
 Starting the challenge, the server tells us "your pen testing friend just sent you this from a recent job." Looking at the challenge file, we have a pcap with quite a bit of interesting traffic.
 
-![Excerpt from the ffbank pcap]({{site.url}}/assets/ffbank1.png)
+![Excerpt from the ffbank pcap](https://github.com/byzant1ne/ctf-writeups/dc23-openctf/images/ffbank1.png)
 
 Looking through the pcap, we initially see a lot of TCP and STP packets, as well as a few other protocols (NTP and CDP). Let's have a look at the TCP first. Following the stream in Wireshark, we can easily see some plaintext traffic with what looks like some kind of bank system.
 
