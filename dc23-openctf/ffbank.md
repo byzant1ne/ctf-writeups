@@ -76,7 +76,7 @@ When we tried to make a manager deposit, we were challenged with a password simi
 	HINT 06562: sitar ____ sitcoms ____ ______
 
 
-Every time we logged into the Manager Deposit, we got a similar challenge with a different hint number and words, with the blanks in various places. This was not a lot to go off of, so we wrote a quick script to grab a ton of them to analyze with the hope that we could find a way to automatically crack the password.
+Every time we logged into the manager deposit, we got a similar challenge with a different hint number and words, with the blanks in various places. This was not a lot to go off of, so we wrote a quick script to grab a ton of them to analyze with the hope that we could find a way to automatically crack the password.
 
 To crack the password generation algorithm, we have a few pieces of data to work with:
 
@@ -86,7 +86,7 @@ To crack the password generation algorithm, we have a few pieces of data to work
 
 We thought about how all of this information fit together, and realized that in all the hints, the words were close to one another alphabetically. We also noticed that there were always 5 words and/or blanks in total, as above. The hint number is also always 5-digits.
 
-It turns out that the hint is actually a series of indices relative to an arbitrary word in a wordlist. This arbitrary 'base word' has an index of zero, and we can infer what the other words are based on the index in the hint. To tie this to the example above, `sitar` is the root word, since we are told it is index zero, meaning `sitcoms` is five positions past it in the wordlist. These five words together make the manager password for that session. 
+It turns out that the hint is actually a series of indices relative to an arbitrary word in a wordlist. This 'base word' has an index of zero, and we can infer what the other words are based on the index in the hint. To tie this to the example above, `sitar` is the 'base word', since we are told it is index zero, meaning `sitcoms` is five positions past it in the wordlist. These five words together make the manager password for that session. 
 
 After much frustrated searching, we discovered that the wordlist used to generate these passwords appeared to be the British English wordlist from `/usr/share/dict`. (Did I mention that *nobody* solved this challenge?) We grabbed the `wbritish` package from the Kali repos and got cracking. Using this wordlist and the indexing, we found that the password to the above challenge would be `sitar site sitcoms site sitars`.
 
@@ -96,7 +96,9 @@ Basically, our script read the entire dictionary into a data structure that we c
 
 We had just fired up the script and were raking in the dough when OpenCTF ended! It was disappointing to be so close to the flag after all that work, but it was definitely rewarding to get within sight of the end and nearly become the only team to solve that challenge.
 
-Overall, we learned some great CTF techniques and I personally got a lot out of this challenge, being one of my first CTFs ever. Perhaps the most important lesson here is time management and tradecraft. On a complex, multi-staged challenge such as this one, you need to have a game plan and keep moving forward. As we saw, there were multiple techniques to get to the flag, which employed different skill sets. It was a good lesson in knowing your own abilities, working well with your teammates, and pursuing not neccessarily the simplest, but the most efficient strategy.
+We learned some great CTF techniques from this challenge and I personally got a lot out of it, being one of my first CTFs ever. Perhaps the most important lesson here is time management and tradecraft. On a complex, multi-staged challenge such as this one, you need to have a game plan and keep moving forward at all times. 
+
+As we saw, there were multiple techniques to get to the flag, which employed different skill sets. It was a good lesson in knowing your own abilities, working well with your teammates, and pursuing not neccessarily the simplest, but the most efficient strategy.
 
 Overall 10/10, would almost capture the flag again.
 
